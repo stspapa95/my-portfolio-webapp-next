@@ -17,7 +17,7 @@ export function ProjectCaseStudy({
 }: ProjectCaseStudyProps) {
 	return (
 		<article>
-			<div className="relative">
+			<div className="modal-hero relative">
 				<ProjectMedia
 					src={project.image}
 					alt={`${project.title} preview`}
@@ -28,7 +28,7 @@ export function ProjectCaseStudy({
 				{closeAction}
 			</div>
 
-			<div className="px-[clamp(20px,4vw,32px)] pt-[26px] pb-[32px]">
+			<div className="modal-copy px-[clamp(20px,4vw,32px)] pt-[26px] pb-[32px]">
 				<Heading
 					id={headingId}
 					className="font-display text-[length:var(--h-sub)] leading-[1.05] font-semibold tracking-[-0.04em] text-fg"
@@ -103,8 +103,8 @@ export function ProjectCaseStudy({
 									rel="noreferrer"
 									className={
 										primary
-											? "inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent px-[22px] font-mono text-[12.5px] tracking-[0.04em] text-bg transition-transform duration-300 ease-[var(--ease)] hover:-translate-y-0.5"
-											: "inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-line px-[22px] font-mono text-[12.5px] tracking-[0.04em] text-fg transition-colors duration-300 hover:border-fg-dim"
+											? "magnetic inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent px-[22px] font-mono text-[12.5px] tracking-[0.04em] text-bg"
+											: "magnetic inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-line px-[22px] font-mono text-[12.5px] tracking-[0.04em] text-fg transition-colors duration-300 hover:border-fg-dim"
 									}
 								>
 									{link.label}

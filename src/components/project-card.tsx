@@ -8,7 +8,7 @@ type ProjectCardProps = {
 export function ProjectCard({ project }: ProjectCardProps) {
 	return (
 		<>
-			<div className="relative aspect-16/10 overflow-hidden bg-surface">
+			<div className="thumb relative aspect-16/10 overflow-hidden bg-surface">
 				<ProjectMedia
 					src={project.image}
 					alt={`${project.title} preview`}

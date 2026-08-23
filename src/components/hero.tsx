@@ -114,13 +114,13 @@ export function Hero() {
 				<div className="hero-cta mt-8 flex flex-wrap gap-[14px]">
 					<a
 						href="#work"
-						className="inline-flex min-h-11 items-center justify-center rounded-full bg-accent px-[22px] font-display text-[14.5px] font-semibold tracking-[-0.02em] text-bg transition-transform duration-300 ease-[var(--ease)] hover:-translate-y-0.5"
+						className="magnetic inline-flex min-h-11 items-center justify-center rounded-full bg-accent px-[22px] font-display text-[14.5px] font-semibold tracking-[-0.02em] text-bg"
 					>
 						View selected work
 					</a>
 					<a
 						href="#contact"
-						className="inline-flex min-h-11 items-center justify-center rounded-full border border-line px-[22px] font-display text-[14.5px] tracking-[-0.02em] text-fg transition-colors duration-300 hover:border-fg-dim"
+						className="magnetic inline-flex min-h-11 items-center justify-center rounded-full border border-line px-[22px] font-display text-[14.5px] tracking-[-0.02em] text-fg"
 					>
 						Get in touch
 					</a>

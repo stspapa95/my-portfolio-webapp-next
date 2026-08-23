@@ -81,7 +81,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 				<CursorGlow />
 				<Nav />
 				<Motion />
-				{children}
+				<div id="smooth-wrapper">
+					<div id="smooth-content">{children}</div>
+				</div>
 				<Analytics />
 			</body>
 		</html>

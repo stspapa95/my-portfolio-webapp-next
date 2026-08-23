@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@property --accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #b4ff39;
+}
+
 :root {
   --bg: #0d0d0f;
   --surface: #141418;
@@ -9,8 +15,8 @@
   --text-dim: #c4c4cd;
   --muted: #8b8b95;
   --accent: #b4ff39;
-  --accent-soft: rgba(180, 255, 57, 0.08);
-  --accent-line: rgba(180, 255, 57, 0.28);
+  --accent-soft: color-mix(in srgb, var(--accent) 8%, transparent);
+  --accent-line: color-mix(in srgb, var(--accent) 28%, transparent);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --h-hero: clamp(52px, 11.5vw, 152px);
   --h-section: clamp(32px, 5.2vw, 58px);
@@ -40,6 +46,10 @@ html {
   color-scheme: dark;
 }
 
+html.smoother-active {
+  scroll-behavior: auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -52,6 +62,7 @@ body {
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   font-size: var(--body);
   line-height: 1.75;
+  overflow-x: clip;
 }
 
 body::after {
@@ -275,8 +286,8 @@ header nav {
   pointer-events: none;
   background: radial-gradient(
     circle,
-    rgba(180, 255, 57, 0.14) 0%,
-    rgba(180, 255, 57, 0.05) 30%,
+    color-mix(in srgb, var(--accent) 14%, transparent) 0%,
+    color-mix(in srgb, var(--accent) 5%, transparent) 30%,
     transparent 62%
   );
   animation: drift 22s ease-in-out infinite;
@@ -291,8 +302,8 @@ header nav {
   pointer-events: none;
   background: radial-gradient(
     circle,
-    rgba(180, 255, 57, 0.1) 0%,
-    rgba(180, 255, 57, 0.03) 36%,
+    color-mix(in srgb, var(--accent) 10%, transparent) 0%,
+    color-mix(in srgb, var(--accent) 3%, transparent) 36%,
     transparent 68%
   );
   animation: drift 28s ease-in-out infinite reverse;
@@ -344,8 +355,8 @@ header nav {
   filter: blur(8px);
   background: radial-gradient(
     circle,
-    rgba(180, 255, 57, 0.11) 0%,
-    rgba(180, 255, 57, 0.045) 35%,
+    color-mix(in srgb, var(--accent) 11%, transparent) 0%,
+    color-mix(in srgb, var(--accent) 4.5%, transparent) 35%,
     transparent 68%
   );
 }
@@ -399,7 +410,7 @@ header nav {
     transform: translateY(-7px);
     border-color: var(--accent-line);
     box-shadow:
-      0 26px 60px -22px rgba(180, 255, 57, 0.28),
+      0 26px 60px -22px color-mix(in srgb, var(--accent) 28%, transparent),
       0 2px 0 rgba(255, 255, 255, 0.04) inset;
   }
 }
@@ -409,7 +420,7 @@ header nav {
   transform: translateY(-7px);
   border-color: var(--accent-line);
   box-shadow:
-    0 26px 60px -22px rgba(180, 255, 57, 0.28),
+    0 26px 60px -22px color-mix(in srgb, var(--accent) 28%, transparent),
     0 2px 0 rgba(255, 255, 255, 0.04) inset;
 }
 
@@ -440,6 +451,14 @@ header nav {
     rgba(255, 255, 255, 0.028) 10px,
     rgba(255, 255, 255, 0.028) 11px
   );
+}
+
+.magnetic {
+  will-change: transform;
+}
+
+.modal-hero {
+  overflow: hidden;
 }
 
 .project-dialog {
@@ -549,5 +568,9 @@ header nav {
   .card .tags,
   .card .card-underline {
     transition: none;
+  }
+
+  .magnetic {
+    will-change: auto;
   }
 }

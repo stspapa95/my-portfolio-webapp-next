@@ -7,9 +7,17 @@ import { ProjectModal } from "@/components/project-modal";
 import type { Project } from "@/content/projects";
 import { gsap, useGSAP } from "@/lib/gsap";
 
+export type ThumbRect = {
+	left: number;
+	top: number;
+	width: number;
+	height: number;
+};
+
 export function ProjectGallery({ projects }: { projects: Project[] }) {
 	const root = useRef<HTMLDivElement>(null);
 	const [openSlug, setOpenSlug] = useState<string | null>(null);
+	const [fromRect, setFromRect] = useState<ThumbRect | null>(null);
 	const openProject =
 		projects.find((project) => project.slug === openSlug) ?? null;
 
@@ -78,6 +86,18 @@ export function ProjectGallery({ projects }: { projects: Project[] }) {
 								return;
 							}
 							event.preventDefault();
+							const thumb = event.currentTarget.querySelector(".thumb");
+							if (thumb) {
+								const box = thumb.getBoundingClientRect();
+								setFromRect({
+									left: box.left,
+									top: box.top,
+									width: box.width,
+									height: box.height,
+								});
+							} else {
+								setFromRect(null);
+							}
 							setOpenSlug(project.slug);
 						}}
 					>
@@ -87,7 +107,14 @@ export function ProjectGallery({ projects }: { projects: Project[] }) {
 					</Link>
 				))}
 			</div>
-			<ProjectModal project={openProject} onClose={() => setOpenSlug(null)} />
+			<ProjectModal
+				project={openProject}
+				fromRect={fromRect}
+				onClose={() => {
+					setOpenSlug(null);
+					setFromRect(null);
+				}}
+			/>
 		</div>
 	);
 }
