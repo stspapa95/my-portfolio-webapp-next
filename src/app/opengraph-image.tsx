@@ -28,7 +28,9 @@ export default function OpenGraphImage() {
 						background: "#B4FF39",
 					}}
 				/>
-				<div style={{ fontSize: 26, letterSpacing: -0.4 }}>{site.name}</div>
+				<div style={{ display: "flex", fontSize: 26, letterSpacing: -0.4 }}>
+					{site.name}
+				</div>
 			</div>
 			<div
 				style={{
@@ -40,6 +42,7 @@ export default function OpenGraphImage() {
 			>
 				<div
 					style={{
+						display: "flex",
 						fontSize: 68,
 						fontWeight: 600,
 						letterSpacing: -2.4,
@@ -48,8 +51,8 @@ export default function OpenGraphImage() {
 				>
 					{site.tagline}
 				</div>
-				<div style={{ fontSize: 26, color: "#8B8B95" }}>
-					{site.years} · {site.availability}
+				<div style={{ display: "flex", fontSize: 26, color: "#8B8B95" }}>
+					{`${site.years} · ${site.availability}`}
 				</div>
 			</div>
 		</div>,
