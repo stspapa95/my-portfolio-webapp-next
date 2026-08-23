@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 import { site } from "@/content/site";
 
 const links = [
-  { href: "#work", label: "Work" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#work", label: "Work" },
+  { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" },
 ] as const;
 
 const [firstName, ...lastName] = site.name.split(" ");
@@ -27,7 +27,7 @@ export function Nav() {
   return (
     <header ref={ref}>
       <nav aria-label="Primary">
-        <a href="#top" className="brand">
+        <a href="/" className="brand">
           {firstName} <span className="brand-last">{lastName.join(" ")}</span>
         </a>
         <div className="nav-links">

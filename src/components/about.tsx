@@ -1,5 +1,3 @@
-import { PlaceholderMedia } from "@/components/placeholder-media";
-
 const skills = [
 	{
 		title: "Languages",
@@ -23,21 +21,27 @@ const skills = [
 
 export function About() {
 	return (
-		<section id="about" className="section relative z-[1] overflow-hidden">
+		<section id="about" aria-labelledby="about-heading" className="section relative z-[1] overflow-hidden">
 			<div
 				className="hero-glow top-auto right-[-8%] bottom-[-20%] opacity-80"
 				aria-hidden
 			/>
 			<div className="shell about-grid">
-				<div data-reveal>
-					<PlaceholderMedia
-						label="portrait — 4:5"
-						className="aspect-4/5 w-full rounded-[14px] border border-line"
-					/>
-				</div>
+				<figure
+					data-reveal
+					className="placeholder relative flex aspect-4/5 w-full flex-col items-center justify-center gap-[10px] overflow-hidden rounded-[14px] border border-line px-6 text-center"
+				>
+					<span className="font-mono text-[11px] tracking-[0.12em] text-accent uppercase">
+						Portrait
+					</span>
+					<span className="font-display text-[20px] tracking-[-0.03em] text-fg">
+						Image coming soon
+					</span>
+				</figure>
 
 				<div className="flex flex-col justify-center">
 					<h2
+						id="about-heading"
 						data-reveal
 						className="font-display text-[length:var(--h-sub)] leading-[1.1] font-semibold tracking-[-0.04em] text-fg"
 					>

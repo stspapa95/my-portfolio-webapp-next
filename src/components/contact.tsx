@@ -2,13 +2,14 @@ import { site } from "@/content/site";
 
 export function Contact() {
   return (
-    <section id="contact" className="section section-contact relative z-[1] overflow-hidden pt-0">
+    <section id="contact" aria-labelledby="contact-heading" className="section section-contact relative z-[1] overflow-hidden pt-0">
       <div
         className="hero-glow top-auto right-[8%] bottom-[10%] opacity-70"
         aria-hidden
       />
       <div className="shell">
         <h2
+          id="contact-heading"
           data-reveal
           className="max-w-[18ch] font-display text-[length:var(--h-section)] leading-[1.05] font-semibold tracking-[-0.04em] text-fg"
         >

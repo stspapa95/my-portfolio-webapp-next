@@ -23,7 +23,8 @@ export const projects: Project[] = [
 		title: "Carlito",
 		year: "2026",
 		role: "Lead frontend",
-		description: "An e-commerce platform for the Carlito brand.",
+		description:
+			"E-commerce storefront for Carlito car accessories and spare parts — catalogue, search, cart, and checkout in Next.js.",
 		image: "/images/carlito-project.jpg",
 		details: ["/images/carlito-project-1.jpg", "/images/carlito-project-2.jpg"],
 		stack: ["React", "Next", "Typescript", "Tailwind"],

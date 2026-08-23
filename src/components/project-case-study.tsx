@@ -4,12 +4,14 @@ import type { Project } from "@/content/projects";
 
 type ProjectCaseStudyProps = {
 	project: Project;
+	heading?: "h1" | "h2";
 	headingId?: string;
 	closeAction?: ReactNode;
 };
 
 export function ProjectCaseStudy({
 	project,
+	heading: Heading = "h2",
 	headingId,
 	closeAction,
 }: ProjectCaseStudyProps) {
@@ -27,12 +29,12 @@ export function ProjectCaseStudy({
 			</div>
 
 			<div className="px-[clamp(20px,4vw,32px)] pt-[26px] pb-[32px]">
-				<h2
+				<Heading
 					id={headingId}
 					className="font-display text-[length:var(--h-sub)] leading-[1.05] font-semibold tracking-[-0.04em] text-fg"
 				>
 					{project.title}
-				</h2>
+				</Heading>
 				<p className="mt-[10px] max-w-[62ch] text-[15.5px] leading-[1.6] text-fg-dim">
 					{project.description}
 				</p>
