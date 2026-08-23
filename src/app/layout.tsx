@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { CursorGlow } from "@/components/cursor-glow";
 import { Nav } from "@/components/nav";
@@ -81,6 +82,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 				<Nav />
 				<Reveals />
 				{children}
+				<Analytics />
 			</body>
 		</html>
 	);
