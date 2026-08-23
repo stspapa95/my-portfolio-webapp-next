@@ -16,9 +16,10 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 		const dialog = ref.current;
 		if (!dialog) return;
 
-		if (project && !dialog.open) {
-			dialog.showModal();
-		}
+    if (project && !dialog.open) {
+      dialog.showModal();
+      dialog.focus();
+    }
 		if (!project && dialog.open) {
 			dialog.close();
 		}
@@ -27,8 +28,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 	return (
 		<dialog
 			ref={ref}
-			className="project-dialog"
-			aria-labelledby="project-dialog-title"
+      className="project-dialog"
+      tabIndex={-1}
+      aria-labelledby="project-dialog-title"
 			onClose={onClose}
 			onClick={(event) => {
 				if (event.target === event.currentTarget) onClose();

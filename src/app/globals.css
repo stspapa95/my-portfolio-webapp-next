@@ -440,10 +440,18 @@ header nav {
   transition: color 0.3s ease, border-color 0.3s ease;
 }
 
-.dialog-close:hover,
-.dialog-close:focus-visible {
+.dialog-close:hover {
   color: var(--accent);
   border-color: var(--accent-line);
+}
+
+.dialog-close:focus {
+  outline: none;
+}
+
+.dialog-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {

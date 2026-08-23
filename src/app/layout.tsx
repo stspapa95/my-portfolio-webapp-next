@@ -3,7 +3,7 @@ import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { CursorGlow } from "@/components/cursor-glow";
 import { Nav } from "@/components/nav";
 import { Reveals } from "@/components/reveals";
-import { site } from "@/content/site";
+import { getSiteUrl, site } from "@/content/site";
 import "./globals.css";
 
 const display = Space_Grotesk({
@@ -22,11 +22,18 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+	metadataBase: getSiteUrl(),
 	title: {
 		default: site.name,
 		template: `%s — ${site.name}`,
 	},
 	description: site.tagline,
+	openGraph: {
+		title: site.name,
+		description: site.tagline,
+		type: "website",
+		locale: "en_US",
+	},
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
