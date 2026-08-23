@@ -92,11 +92,11 @@ body::after {
 
 @media (max-width: 640px) {
   .section {
-    padding-block: 32px;
+    padding-block: 48px;
   }
 
   .section.section-contact {
-    padding-top: 0;
+    padding-top: 24px;
     padding-bottom: 24px;
   }
 }

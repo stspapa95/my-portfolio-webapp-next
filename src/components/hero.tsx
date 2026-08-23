@@ -18,7 +18,7 @@ export function Hero() {
         </h1>
 
         <div data-reveal className="mt-[22px] max-w-[62ch]">
-          <Typed text={site.tagline} />
+          <Typed lines={site.taglines} />
         </div>
 
         <div data-reveal className="mt-8 flex flex-wrap gap-[14px]">

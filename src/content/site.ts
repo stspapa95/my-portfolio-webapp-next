@@ -3,6 +3,11 @@ export const site = {
 	jobTitle: "Web Developer",
 	email: "sts.papa@gmail.com",
 	tagline: "I build fast, precise interfaces for the web.",
+	taglines: [
+		"I build fast, scalable interfaces for the web.",
+		"I care about the half-second between click and response.",
+		"I ship interfaces that still feel instant in production.",
+	],
 	description:
 		"Frontend engineer Stergios Papathanasiou designs and builds fast web interfaces & scalable web applications.",
 	years: "5 yrs shipping product",
