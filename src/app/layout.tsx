@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { CursorGlow } from "@/components/cursor-glow";
+import { Motion } from "@/components/motion";
 import { Nav } from "@/components/nav";
-import { Reveals } from "@/components/reveals";
 import { getSiteUrl, site } from "@/content/site";
 import "./globals.css";
 
@@ -80,7 +80,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 				</a>
 				<CursorGlow />
 				<Nav />
-				<Reveals />
+				<Motion />
 				{children}
 				<Analytics />
 			</body>

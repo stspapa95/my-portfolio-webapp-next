@@ -1,47 +1,30 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 export function CursorGlow() {
-  const ref = useRef<HTMLDivElement>(null);
+	const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!window.matchMedia("(pointer: fine)").matches) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+	useGSAP(() => {
+		if (!window.matchMedia("(pointer: fine)").matches) return;
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const node = ref.current;
-    if (!node) return;
+		const node = ref.current;
+		if (!node) return;
 
-    let x = 0;
-    let y = 0;
-    let cx = 0;
-    let cy = 0;
-    let raf: number | null = null;
+		const xTo = gsap.quickTo(node, "x", { duration: 0.55, ease: "power3" });
+		const yTo = gsap.quickTo(node, "y", { duration: 0.55, ease: "power3" });
 
-    const tick = () => {
-      cx += (x - cx) * 0.12;
-      cy += (y - cy) * 0.12;
-      node.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
-      raf =
-        Math.abs(x - cx) + Math.abs(y - cy) > 0.4
-          ? window.requestAnimationFrame(tick)
-          : null;
-    };
+		const move = (event: PointerEvent) => {
+			node.style.opacity = "1";
+			xTo(event.clientX);
+			yTo(event.clientY);
+		};
 
-    const move = (event: PointerEvent) => {
-      x = event.clientX;
-      y = event.clientY;
-      node.style.opacity = "1";
-      if (!raf) raf = window.requestAnimationFrame(tick);
-    };
+		window.addEventListener("pointermove", move, { passive: true });
+		return () => window.removeEventListener("pointermove", move);
+	});
 
-    window.addEventListener("pointermove", move, { passive: true });
-
-    return () => {
-      window.removeEventListener("pointermove", move);
-      if (raf) window.cancelAnimationFrame(raf);
-    };
-  }, []);
-
-  return <div ref={ref} className="cursor-glow" aria-hidden />;
+	return <div ref={ref} className="cursor-glow" aria-hidden />;
 }

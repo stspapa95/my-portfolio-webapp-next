@@ -26,7 +26,10 @@ export const projects: Project[] = [
 		description:
 			"A work-in-progress personal budgeting tool with AI analysis and insights — cash flow, categories, and what to cut, without connecting a bank.",
 		image: "/images/resta-screenshot-1.jpg",
-		details: ["/images/resta-project-2.jpg", "/images/resta-project-3.jpg"],
+		details: [
+			"/images/resta-screenshot-2.jpg",
+			"/images/resta-screenshot-3.jpg",
+		],
 		stack: [
 			"React",
 			"Next",

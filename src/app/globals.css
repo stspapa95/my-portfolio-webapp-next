@@ -141,6 +141,19 @@ header[data-scrolled] {
   border-bottom-color: rgba(255, 255, 255, 0.09);
 }
 
+#gs-bar {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: var(--accent);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
 /* the row — same rules desktop and mobile */
 header nav {
   container-type: inline-size;
@@ -229,6 +242,30 @@ header nav {
   transform: none;
 }
 
+.hero-stage:not([data-ready]) .hero-title,
+.hero-stage:not([data-ready]) .hero-cta,
+.hero-stage:not([data-ready]) .hero-meta {
+  opacity: 0;
+}
+
+.hero-parallax {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gs-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.gs-char {
+  display: inline-block;
+  will-change: transform;
+}
+
 .hero-glow {
   position: absolute;
   top: -10%;
@@ -315,15 +352,6 @@ header nav {
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity 0.8s var(--ease),
-    transform 0.8s var(--ease);
-}
-
-[data-reveal].vis {
-  opacity: 1;
-  transform: none;
 }
 
 .card {
@@ -348,6 +376,14 @@ header nav {
     transform 0.45s var(--ease),
     border-color 0.45s ease,
     box-shadow 0.45s ease;
+}
+
+.card-tilt {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  transform-style: preserve-3d;
 }
 
 .card img {

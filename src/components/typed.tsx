@@ -17,7 +17,13 @@ function getReducedMotion() {
 	return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export function Typed({ lines }: { lines: readonly string[] }) {
+export function Typed({
+	lines,
+	play = true,
+}: {
+	lines: readonly string[];
+	play?: boolean;
+}) {
 	const last = lines[lines.length - 1] ?? "";
 	const reduceMotion = useSyncExternalStore(
 		subscribeReducedMotion,
@@ -33,7 +39,7 @@ export function Typed({ lines }: { lines: readonly string[] }) {
 	const isLast = index >= lines.length - 1;
 
 	useEffect(() => {
-		if (reduceMotion) {
+		if (reduceMotion || !play) {
 			return;
 		}
 
@@ -62,7 +68,7 @@ export function Typed({ lines }: { lines: readonly string[] }) {
 		}, GAP_MS);
 
 		return () => window.clearTimeout(id);
-	}, [isLast, n, phase, reduceMotion, text]);
+	}, [isLast, n, phase, play, reduceMotion, text]);
 
 	return (
 		<p className="font-mono text-[15px] leading-[2.2em] text-fg-dim min-[480px]:text-[16.5px]">

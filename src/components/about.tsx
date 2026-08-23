@@ -27,17 +27,16 @@ export function About() {
 				aria-hidden
 			/>
 			<div className="shell about-grid">
-				<figure
-					data-reveal
-					className="placeholder relative flex aspect-4/5 w-full flex-col items-center justify-center gap-[10px] overflow-hidden rounded-[14px] border border-line px-6 text-center"
-				>
-					<span className="font-mono text-[11px] tracking-[0.12em] text-accent uppercase">
-						Portrait
-					</span>
-					<span className="font-display text-[20px] tracking-[-0.03em] text-fg">
-						Image coming soon
-					</span>
-				</figure>
+				<div data-reveal>
+					<figure className="portrait placeholder relative flex aspect-4/5 w-full flex-col items-center justify-center gap-[10px] overflow-hidden rounded-[14px] border border-line px-6 text-center">
+						<span className="font-mono text-[11px] tracking-[0.12em] text-accent uppercase">
+							Portrait
+						</span>
+						<span className="font-display text-[20px] tracking-[-0.03em] text-fg">
+							Image coming soon
+						</span>
+					</figure>
+				</div>
 
 				<div className="flex flex-col justify-center">
 					<h2
