@@ -19,6 +19,30 @@ export type Project = {
 
 export const projects: Project[] = [
 	{
+		slug: "resta",
+		title: "Resta",
+		year: "2026",
+		role: "Product & Lead frontend",
+		description:
+			"A work-in-progress personal budgeting tool with AI analysis and insights — cash flow, categories, and what to cut, without connecting a bank.",
+		image: "/images/resta-screenshot-1.jpg",
+		details: ["/images/resta-project-2.jpg", "/images/resta-project-3.jpg"],
+		stack: [
+			"React",
+			"Next",
+			"Typescript",
+			"Tailwind",
+			"Prisma",
+			"Supabase",
+			"Clerk",
+		],
+		body: [
+			"Resta (Ρέστα) is a personal budgeting app for seeing where money goes, without accounting software and without linking a bank. You log a transaction in a couple of seconds — amount, category, save — and the month updates: cash flow, categories, subscriptions, and budgets on one screen.",
+			"AI insights explain, in plain language, what changed in spending and what to cut. Twelve months of history sit behind readable charts. The product is still in progress; this is the landing and the direction of the interface.",
+		],
+		links: [],
+	},
+	{
 		slug: "carlito",
 		title: "Carlito",
 		year: "2026",

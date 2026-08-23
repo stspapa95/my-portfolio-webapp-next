@@ -20,7 +20,7 @@ export function ProjectCaseStudy({
 			<div className="relative">
 				<ProjectMedia
 					src={project.image}
-					alt={`${project.title} storefront`}
+					alt={`${project.title} preview`}
 					className="aspect-16/10"
 					sizes="(max-width: 960px) 100vw, 960px"
 					priority

@@ -11,7 +11,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 			<div className="relative aspect-16/10 overflow-hidden bg-surface">
 				<ProjectMedia
 					src={project.image}
-					alt={`${project.title} storefront`}
+					alt={`${project.title} preview`}
 					className="size-full"
 					sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
 				/>
