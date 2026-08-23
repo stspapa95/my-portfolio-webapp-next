@@ -22,7 +22,7 @@ export function ProjectCaseStudy({
 					src={project.image}
 					alt={`${project.title} storefront`}
 					className="aspect-16/10"
-					sizes="(max-width: 760px) 100vw, 760px"
+					sizes="(max-width: 960px) 100vw, 960px"
 					priority
 				/>
 				{closeAction}
@@ -85,7 +85,7 @@ export function ProjectCaseStudy({
 								src={src}
 								alt={`${project.title} detail ${index + 1}`}
 								className="aspect-16/10 rounded-[12px] border border-line"
-								sizes="(max-width: 640px) 100vw, 380px"
+								sizes="(max-width: 640px) 100vw, 460px"
 							/>
 						))}
 					</div>

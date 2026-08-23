@@ -407,7 +407,7 @@ header nav {
 }
 
 .project-dialog {
-  width: min(760px, calc(100vw - 24px));
+  width: min(960px, calc(100vw - 24px));
   max-height: calc(100vh - 24px);
   max-height: calc(100dvh - 24px);
   margin: auto;
@@ -421,8 +421,8 @@ header nav {
 }
 
 .project-dialog::backdrop {
-  background: rgba(13, 13, 15, 0.72);
-  backdrop-filter: blur(8px);
+  background: rgba(13, 13, 15, 0.42);
+  backdrop-filter: blur(6px);
 }
 
 .project-dialog:focus {
@@ -473,6 +473,23 @@ header nav {
 .dialog-close:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .project-dialog:modal {
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .dialog-close {
+    top: max(14px, env(safe-area-inset-top));
+    right: max(14px, env(safe-area-inset-right));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
