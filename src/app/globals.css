@@ -152,19 +152,6 @@ header[data-scrolled] {
   border-bottom-color: rgba(255, 255, 255, 0.09);
 }
 
-#gs-bar {
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  height: 2px;
-  width: 100%;
-  transform: scaleX(0);
-  transform-origin: left;
-  background: var(--accent);
-  opacity: 0.85;
-  pointer-events: none;
-}
-
 /* the row — same rules desktop and mobile */
 header nav {
   container-type: inline-size;

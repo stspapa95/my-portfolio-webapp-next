@@ -13,9 +13,6 @@ type ProjectModalProps = {
 };
 
 const CLEAR = "x,y,scaleX,scaleY,transform,transformOrigin,opacity";
-const MOBILE_SHIFT = 18;
-const MOBILE_OPEN = 0.42;
-const MOBILE_CLOSE = 0.28;
 
 export function ProjectModal({
 	project,
@@ -23,7 +20,6 @@ export function ProjectModal({
 	onClose,
 }: ProjectModalProps) {
 	const ref = useRef<HTMLDialogElement>(null);
-	const closing = useRef(false);
 
 	useEffect(() => {
 		const dialog = ref.current;
@@ -33,7 +29,6 @@ export function ProjectModal({
 		let nested = 0;
 
 		if (project && !dialog.open) {
-			closing.current = false;
 			const reduce = window.matchMedia(
 				"(prefers-reduced-motion: reduce)",
 			).matches;
@@ -96,7 +91,7 @@ export function ProjectModal({
 						gsap.fromTo(
 							dialog,
 							{
-								y: mobile ? MOBILE_SHIFT : 44,
+								y: mobile ? 18 : 44,
 								scaleX: mobile ? 1 : 0.97,
 								scaleY: mobile ? 1 : 0.97,
 								opacity: 0,
@@ -106,7 +101,7 @@ export function ProjectModal({
 								scaleX: 1,
 								scaleY: 1,
 								opacity: 1,
-								duration: mobile ? MOBILE_OPEN : 0.65,
+								duration: 0.65,
 								ease: "expo.out",
 							},
 						);
@@ -119,6 +114,14 @@ export function ProjectModal({
 			}
 		}
 
+		if (!project && dialog.open) {
+			gsap.set([dialog, dialog.querySelector(".modal-hero")], {
+				clearProps: CLEAR,
+			});
+			dialog.close();
+			pauseSmoother(false);
+		}
+
 		return () => {
 			cancelAnimationFrame(frame);
 			cancelAnimationFrame(nested);
@@ -128,60 +131,18 @@ export function ProjectModal({
 		};
 	}, [fromRect, project]);
 
-	const finishClose = () => {
-		const dialog = ref.current;
-		closing.current = false;
-		if (!dialog) {
-			pauseSmoother(false);
-			onClose();
-			return;
-		}
-		gsap.set([dialog, dialog.querySelector(".modal-hero")], {
-			clearProps: CLEAR,
-		});
-		if (dialog.open) dialog.close();
-		pauseSmoother(false);
-		onClose();
-	};
-
-	const requestClose = () => {
-		const dialog = ref.current;
-		if (!dialog?.open || closing.current) return;
-
-		const reduce = window.matchMedia(
-			"(prefers-reduced-motion: reduce)",
-		).matches;
-		const mobile = window.matchMedia("(max-width: 640px)").matches;
-
-		if (reduce || !mobile) {
-			finishClose();
-			return;
-		}
-
-		closing.current = true;
-		gsap.killTweensOf(dialog);
-		gsap.to(dialog, {
-			opacity: 0,
-			y: MOBILE_SHIFT,
-			duration: MOBILE_CLOSE,
-			ease: "expo.in",
-			overwrite: true,
-			onComplete: finishClose,
-		});
-	};
-
 	return (
 		<dialog
 			ref={ref}
 			className="project-dialog"
 			tabIndex={-1}
 			aria-labelledby="project-dialog-title"
-			onCancel={(event) => {
-				event.preventDefault();
-				requestClose();
+			onClose={() => {
+				pauseSmoother(false);
+				onClose();
 			}}
 			onClick={(event) => {
-				if (event.target === event.currentTarget) requestClose();
+				if (event.target === event.currentTarget) onClose();
 			}}
 		>
 			{project && (
@@ -191,7 +152,7 @@ export function ProjectModal({
 					closeAction={
 						<button
 							type="button"
-							onClick={requestClose}
+							onClick={onClose}
 							className="dialog-close"
 							aria-label="Close case study"
 						>

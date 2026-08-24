@@ -23,7 +23,6 @@ export function Nav() {
 					))}
 				</div>
 			</nav>
-			<span id="gs-bar" aria-hidden />
 		</header>
 	);
 }

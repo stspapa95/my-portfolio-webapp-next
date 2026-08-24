@@ -168,17 +168,6 @@ export function Motion() {
 				});
 			}
 
-			gsap.to("#gs-bar", {
-				scaleX: 1,
-				ease: "none",
-				scrollTrigger: {
-					trigger: document.documentElement,
-					start: "top top",
-					end: "bottom bottom",
-					scrub: 0.25,
-				},
-			});
-
 			const sections = gsap.utils.toArray<HTMLElement>("main > section");
 			gsap.set(sections, { transformOrigin: "center center", force3D: true });
 			const skewers = sections.map((section) =>
