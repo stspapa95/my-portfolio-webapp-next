@@ -68,6 +68,45 @@ function bindMagnets() {
 	};
 }
 
+const HASH_POSITION = "top 70px";
+
+function scrollToHash(hash: string, smooth: boolean) {
+	if (hash.length < 2) return false;
+	const target = document.getElementById(decodeURIComponent(hash.slice(1)));
+	if (!target) return false;
+	const smoother = getSmoother();
+	if (!smoother) return false;
+	smoother.scrollTo(target, smooth, HASH_POSITION);
+	return true;
+}
+
+function bindHashLinks() {
+	const onClick = (event: MouseEvent) => {
+		if (event.defaultPrevented || event.button !== 0) return;
+		if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+			return;
+		}
+		const link = (event.target as Element | null)?.closest?.("a");
+		if (!link) return;
+
+		const href = link.getAttribute("href");
+		if (!href) return;
+
+		const url = new URL(href, window.location.href);
+		if (url.origin !== window.location.origin) return;
+		if (url.pathname !== window.location.pathname) return;
+		if (!scrollToHash(url.hash, true)) return;
+
+		event.preventDefault();
+		if (url.hash !== window.location.hash) {
+			history.pushState(null, "", url.pathname + url.search + url.hash);
+		}
+	};
+
+	document.addEventListener("click", onClick);
+	return () => document.removeEventListener("click", onClick);
+}
+
 export function Motion() {
 	const pathname = usePathname();
 
@@ -90,10 +129,13 @@ export function Motion() {
 				return;
 			}
 
+			let restoration: History["scrollRestoration"] | undefined;
 			const wrapper = document.querySelector("#smooth-wrapper");
 			const content = document.querySelector("#smooth-content");
 			if (fine && wrapper && content) {
 				document.documentElement.classList.add("smoother-active");
+				restoration = history.scrollRestoration;
+				history.scrollRestoration = "manual";
 				setSmoother(
 					ScrollSmoother.create({
 						wrapper: "#smooth-wrapper",
@@ -191,17 +233,25 @@ export function Motion() {
 			});
 
 			const magnetCleanups = fine ? [bindMagnets()] : [];
+			const hashCleanups = getSmoother() ? [bindHashLinks()] : [];
 
 			const refresh = () => ScrollTrigger.refresh();
-			void document.fonts?.ready.then(refresh);
+			const goHash = () => scrollToHash(window.location.hash, false);
+			void document.fonts?.ready.then(() => {
+				refresh();
+				goHash();
+			});
 			window.addEventListener("load", refresh);
 			refresh();
+			goHash();
 
 			return () => {
 				window.clearTimeout(idle);
 				window.removeEventListener("load", refresh);
 				magnetCleanups.forEach((cleanup) => cleanup());
+				hashCleanups.forEach((cleanup) => cleanup());
 				document.documentElement.classList.remove("smoother-active");
+				if (restoration) history.scrollRestoration = restoration;
 				header?.removeAttribute("data-scrolled");
 				getSmoother()?.kill();
 				setSmoother(null);
