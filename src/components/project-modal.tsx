@@ -13,6 +13,9 @@ type ProjectModalProps = {
 };
 
 const CLEAR = "x,y,scaleX,scaleY,transform,transformOrigin,opacity";
+const MOBILE_SHIFT = 18;
+const MOBILE_OPEN = 0.42;
+const MOBILE_CLOSE = 0.28;
 
 export function ProjectModal({
 	project,
@@ -93,7 +96,7 @@ export function ProjectModal({
 						gsap.fromTo(
 							dialog,
 							{
-								y: mobile ? 18 : 44,
+								y: mobile ? MOBILE_SHIFT : 44,
 								scaleX: mobile ? 1 : 0.97,
 								scaleY: mobile ? 1 : 0.97,
 								opacity: 0,
@@ -103,7 +106,7 @@ export function ProjectModal({
 								scaleX: 1,
 								scaleY: 1,
 								opacity: 1,
-								duration: 0.65,
+								duration: mobile ? MOBILE_OPEN : 0.65,
 								ease: "expo.out",
 							},
 						);
@@ -159,9 +162,10 @@ export function ProjectModal({
 		gsap.killTweensOf(dialog);
 		gsap.to(dialog, {
 			opacity: 0,
-			y: 18,
-			duration: 0.35,
-			ease: "power2.in",
+			y: MOBILE_SHIFT,
+			duration: MOBILE_CLOSE,
+			ease: "expo.in",
+			overwrite: true,
 			onComplete: finishClose,
 		});
 	};
