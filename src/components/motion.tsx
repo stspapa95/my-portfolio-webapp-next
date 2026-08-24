@@ -10,12 +10,6 @@ import {
 	useGSAP,
 } from "@/lib/gsap";
 
-const ACCENT_SHIFTS = [
-	["#work", "#B4FF39"],
-	["#about", "#7DD3FC"],
-	["#contact", "#FF6B4A"],
-] as const;
-
 function bindMagnets() {
 	const R = 90;
 	const cache = new Map<
@@ -207,21 +201,6 @@ export function Motion() {
 				},
 			});
 
-			const root = document.documentElement;
-			ACCENT_SHIFTS.forEach(([selector, color]) => {
-				if (!document.querySelector(selector)) return;
-				gsap.to(root, {
-					"--accent": color,
-					ease: "none",
-					scrollTrigger: {
-						trigger: selector,
-						start: "top 70%",
-						end: "top 30%",
-						scrub: 0.8,
-					},
-				});
-			});
-
 			const magnetCleanups = fine ? [bindMagnets()] : [];
 
 			const refresh = () => ScrollTrigger.refresh();
@@ -234,7 +213,6 @@ export function Motion() {
 				window.removeEventListener("load", refresh);
 				magnetCleanups.forEach((cleanup) => cleanup());
 				document.documentElement.classList.remove("smoother-active");
-				document.documentElement.style.removeProperty("--accent");
 				header?.removeAttribute("data-scrolled");
 				getSmoother()?.kill();
 				setSmoother(null);

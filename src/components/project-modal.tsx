@@ -20,6 +20,7 @@ export function ProjectModal({
 	onClose,
 }: ProjectModalProps) {
 	const ref = useRef<HTMLDialogElement>(null);
+	const closing = useRef(false);
 
 	useEffect(() => {
 		const dialog = ref.current;
@@ -29,6 +30,7 @@ export function ProjectModal({
 		let nested = 0;
 
 		if (project && !dialog.open) {
+			closing.current = false;
 			const reduce = window.matchMedia(
 				"(prefers-reduced-motion: reduce)",
 			).matches;
@@ -114,14 +116,6 @@ export function ProjectModal({
 			}
 		}
 
-		if (!project && dialog.open) {
-			gsap.set([dialog, dialog.querySelector(".modal-hero")], {
-				clearProps: CLEAR,
-			});
-			dialog.close();
-			pauseSmoother(false);
-		}
-
 		return () => {
 			cancelAnimationFrame(frame);
 			cancelAnimationFrame(nested);
@@ -131,18 +125,59 @@ export function ProjectModal({
 		};
 	}, [fromRect, project]);
 
+	const finishClose = () => {
+		const dialog = ref.current;
+		closing.current = false;
+		if (!dialog) {
+			pauseSmoother(false);
+			onClose();
+			return;
+		}
+		gsap.set([dialog, dialog.querySelector(".modal-hero")], {
+			clearProps: CLEAR,
+		});
+		if (dialog.open) dialog.close();
+		pauseSmoother(false);
+		onClose();
+	};
+
+	const requestClose = () => {
+		const dialog = ref.current;
+		if (!dialog?.open || closing.current) return;
+
+		const reduce = window.matchMedia(
+			"(prefers-reduced-motion: reduce)",
+		).matches;
+		const mobile = window.matchMedia("(max-width: 640px)").matches;
+
+		if (reduce || !mobile) {
+			finishClose();
+			return;
+		}
+
+		closing.current = true;
+		gsap.killTweensOf(dialog);
+		gsap.to(dialog, {
+			opacity: 0,
+			y: 18,
+			duration: 0.35,
+			ease: "power2.in",
+			onComplete: finishClose,
+		});
+	};
+
 	return (
 		<dialog
 			ref={ref}
 			className="project-dialog"
 			tabIndex={-1}
 			aria-labelledby="project-dialog-title"
-			onClose={() => {
-				pauseSmoother(false);
-				onClose();
+			onCancel={(event) => {
+				event.preventDefault();
+				requestClose();
 			}}
 			onClick={(event) => {
-				if (event.target === event.currentTarget) onClose();
+				if (event.target === event.currentTarget) requestClose();
 			}}
 		>
 			{project && (
@@ -152,7 +187,7 @@ export function ProjectModal({
 					closeAction={
 						<button
 							type="button"
-							onClick={onClose}
+							onClick={requestClose}
 							className="dialog-close"
 							aria-label="Close case study"
 						>
