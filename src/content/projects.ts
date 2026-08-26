@@ -43,7 +43,13 @@ export const projects: Project[] = [
 			"Resta (Ρέστα) is a personal budgeting app for seeing where money goes, without accounting software and without linking a bank. You log a transaction in a couple of seconds — amount, category, save — and the month updates: cash flow, categories, subscriptions, and budgets on one screen.",
 			"AI insights explain, in plain language, what changed in spending and what to cut. Twelve months of history sit behind readable charts. The product is still in progress; this is the landing and the direction of the interface.",
 		],
-		links: [],
+		links: [
+			{
+				label: "Live demo",
+				href: "https://resta-webapp-next.vercel.app/",
+				variant: "primary",
+			},
+		],
 	},
 	{
 		slug: "carlito",
