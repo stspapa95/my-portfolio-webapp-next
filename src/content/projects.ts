@@ -30,15 +30,7 @@ export const projects: Project[] = [
 			"/images/resta-screenshot-2.jpg",
 			"/images/resta-screenshot-3.jpg",
 		],
-		stack: [
-			"React",
-			"Next",
-			"Typescript",
-			"Tailwind",
-			"Prisma",
-			"Supabase",
-			"Clerk",
-		],
+		stack: ["React", "Next", "Typescript", "Tailwind", "Prisma", "Supabase"],
 		body: [
 			"Resta (Ρέστα) is a personal budgeting app for seeing where money goes, without accounting software and without linking a bank. You log a transaction in a couple of seconds — amount, category, save — and the month updates: cash flow, categories, subscriptions, and budgets on one screen.",
 			"AI insights explain, in plain language, what changed in spending and what to cut. Twelve months of history sit behind readable charts. The product is still in progress; this is the landing and the direction of the interface.",
