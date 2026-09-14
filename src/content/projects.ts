@@ -58,11 +58,11 @@ export const projects: Project[] = [
 			"I built the storefront in Next.js — catalogue, search, cart, and checkout — against a Java backend, so a part can go from fitment to paid order without a separate shop bolted on afterwards.",
 		],
 		links: [
-			{
-				label: "Live demo",
-				href: "https://carlito-dev.up.railway.app/",
-				variant: "primary",
-			},
+			// {
+			// 	label: "Live demo",
+			// 	href: "https://carlito-dev.up.railway.app/",
+			// 	variant: "primary",
+			// },
 		],
 	},
 ];
