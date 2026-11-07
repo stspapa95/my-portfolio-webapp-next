@@ -68,7 +68,7 @@ function bindMagnets() {
 	};
 }
 
-const HASH_POSITION = "top 70px";
+const HASH_POSITION = "top 92px";
 
 function scrollToHash(hash: string, smooth: boolean) {
 	if (hash.length < 2) return false;

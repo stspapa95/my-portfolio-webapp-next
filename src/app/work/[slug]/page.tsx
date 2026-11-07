@@ -56,7 +56,7 @@ export default async function WorkPage({ params }: PageProps<"/work/[slug]">) {
 			<div className="shell section pt-[120px]">
 				<div
 					data-reveal
-					className="overflow-hidden rounded-[16px] border border-line bg-surface-2"
+					className="glass overflow-hidden rounded-[20px] border border-line"
 				>
 					<ProjectCaseStudy project={project} heading="h1" />
 				</div>

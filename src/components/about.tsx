@@ -28,7 +28,7 @@ export function About() {
 			/>
 			<div className="shell about-grid">
 				<div data-reveal>
-					<figure className="portrait placeholder relative flex aspect-4/5 w-full flex-col items-center justify-center gap-[10px] overflow-hidden rounded-[14px] border border-line px-6 text-center">
+					<figure className="portrait placeholder relative z-[1] flex aspect-4/5 w-full flex-col items-center justify-center gap-[10px] overflow-hidden rounded-[20px] border border-line px-6 text-center">
 						<span className="font-mono text-[11px] tracking-[0.12em] text-accent uppercase">
 							Portrait
 						</span>

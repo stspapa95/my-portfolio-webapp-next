@@ -97,7 +97,7 @@ export function Hero() {
 				<div className="hero-glow-2" />
 			</div>
 
-			<div className="shell relative z-[1] flex flex-1 flex-col justify-center pt-[88px] pb-16">
+			<div className="shell relative z-[1] flex flex-1 flex-col justify-center pt-[108px] pb-16">
 				<h1
 					ref={title}
 					className="hero-title font-display text-[length:var(--h-hero)] leading-[0.92] font-semibold tracking-[-0.04em] text-fg"

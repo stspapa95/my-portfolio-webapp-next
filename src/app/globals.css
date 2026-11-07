@@ -17,6 +17,10 @@
   --accent: #b4ff39;
   --accent-soft: color-mix(in srgb, var(--accent) 8%, transparent);
   --accent-line: color-mix(in srgb, var(--accent) 28%, transparent);
+  --glass-fill: rgba(13, 13, 15, 0.42);
+  --glass-fill-strong: rgba(13, 13, 15, 0.86);
+  --glass-rim: rgba(255, 255, 255, 0.16);
+  --glass-shine: rgba(255, 255, 255, 0.22);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --h-hero: clamp(52px, 11.5vw, 152px);
   --h-section: clamp(32px, 5.2vw, 58px);
@@ -94,7 +98,7 @@ body::after {
 
 .section {
   padding-block: clamp(60px, 10vh, 110px);
-  scroll-margin-top: 70px;
+  scroll-margin-top: 92px;
 }
 
 .section.section-contact {
@@ -133,70 +137,38 @@ body::after {
 
 .glass,
 header,
-.dialog-close {
-  --glass-fill: rgba(13, 13, 15, 0.38);
-  --glass-shine: rgba(255, 255, 255, 0.2);
+.dialog-close,
+.portrait {
   position: relative;
   isolation: isolate;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02)),
     var(--glass-fill);
-  backdrop-filter: blur(20px) saturate(165%) brightness(1.08);
-  -webkit-backdrop-filter: blur(20px) saturate(165%) brightness(1.08);
-  border-color: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(22px) saturate(170%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(170%) brightness(1.08);
+  border-color: var(--glass-rim);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    inset 0 -10px 18px rgba(255, 255, 255, 0.03),
-    0 10px 28px rgba(0, 0, 0, 0.22);
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -12px 22px rgba(255, 255, 255, 0.035),
+    0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
 .glass::after,
 header::after,
-.dialog-close::after {
+.dialog-close::after,
+.portrait::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 0;
   border-radius: inherit;
   pointer-events: none;
   background: linear-gradient(
     118deg,
     var(--glass-shine) 0%,
-    rgba(255, 255, 255, 0.06) 24%,
-    transparent 46%
+    rgba(255, 255, 255, 0.06) 22%,
+    transparent 48%
   );
-}
-
-/* the bar — fixed, glassy, borderless until you scroll */
-header {
-  --glass-fill: rgba(13, 13, 15, 0.82);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 20;
-  overflow: hidden;
-  border-bottom: 1px solid transparent;
-  transition:
-    border-color 0.35s ease,
-    background 0.35s ease,
-    box-shadow 0.35s ease;
-}
-
-header::after {
-  z-index: 0;
-  background: linear-gradient(
-    105deg,
-    transparent 28%,
-    rgba(255, 255, 255, 0.1) 48%,
-    transparent 64%
-  );
-  background-size: 220% 100%;
-  animation: glass-sheen 16s ease-in-out infinite;
-}
-
-header[data-scrolled] {
-  --glass-fill: rgba(13, 13, 15, 0.92);
-  border-bottom-color: rgba(255, 255, 255, 0.12);
 }
 
 @keyframes glass-sheen {
@@ -209,15 +181,51 @@ header[data-scrolled] {
   }
 }
 
-/* the row — same rules desktop and mobile */
+/* floating glass capsule */
+header {
+  --glass-fill: var(--glass-fill-strong);
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 20;
+  width: auto;
+  max-width: 1200px;
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid var(--glass-rim);
+  border-radius: 999px;
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+header::after {
+  background: linear-gradient(
+    105deg,
+    transparent 26%,
+    rgba(255, 255, 255, 0.12) 48%,
+    transparent 66%
+  );
+  background-size: 220% 100%;
+  animation: glass-sheen 16s ease-in-out infinite;
+}
+
+header[data-scrolled] {
+  --glass-fill: rgba(13, 13, 15, 0.94);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 14px 40px rgba(0, 0, 0, 0.38);
+}
+
 header nav {
   container-type: inline-size;
   container-name: primary-nav;
   position: relative;
   z-index: 1;
-  max-width: 1240px;
-  margin-inline: auto;
-  padding: 16px clamp(20px, 5vw, 64px);
+  padding: 11px 18px 11px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -413,25 +421,24 @@ header nav {
 
 .card {
   --r: 0;
-  --glass-fill: rgba(13, 13, 15, 0.48);
-  --glass-shine: rgba(255, 255, 255, 0.18);
+  --glass-fill: rgba(13, 13, 15, 0.5);
   position: relative;
   isolation: isolate;
   display: flex;
   flex-direction: column;
   width: 100%;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 12px;
+  border: 1px solid var(--glass-rim);
+  border-radius: 20px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
     var(--glass-fill);
-  backdrop-filter: blur(22px) saturate(160%) brightness(1.06);
-  -webkit-backdrop-filter: blur(22px) saturate(160%) brightness(1.06);
+  backdrop-filter: blur(24px) saturate(165%) brightness(1.06);
+  -webkit-backdrop-filter: blur(24px) saturate(165%) brightness(1.06);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -12px 20px rgba(255, 255, 255, 0.03),
-    0 12px 32px rgba(0, 0, 0, 0.22);
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    inset 0 -14px 24px rgba(255, 255, 255, 0.03),
+    0 16px 40px rgba(0, 0, 0, 0.28);
   color: inherit;
   text-align: left;
   text-decoration: none;
@@ -456,8 +463,8 @@ header nav {
   background: linear-gradient(
     118deg,
     var(--glass-shine) 0%,
-    rgba(255, 255, 255, 0.05) 26%,
-    transparent 52%
+    rgba(255, 255, 255, 0.05) 24%,
+    transparent 50%
   );
 }
 
@@ -469,6 +476,13 @@ header nav {
   flex-direction: column;
   height: 100%;
   transform-style: preserve-3d;
+}
+
+.card .thumb {
+  margin: 10px 10px 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .card img {
@@ -484,9 +498,9 @@ header nav {
     transform: translateY(-7px);
     border-color: var(--accent-line);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.22),
-      0 26px 60px -22px color-mix(in srgb, var(--accent) 28%, transparent),
-      0 2px 0 rgba(255, 255, 255, 0.06) inset;
+      inset 0 1px 0 rgba(255, 255, 255, 0.28),
+      0 28px 64px -20px color-mix(in srgb, var(--accent) 32%, transparent),
+      0 2px 0 rgba(255, 255, 255, 0.08) inset;
   }
 }
 
@@ -495,9 +509,9 @@ header nav {
   transform: translateY(-7px);
   border-color: var(--accent-line);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 26px 60px -22px color-mix(in srgb, var(--accent) 28%, transparent),
-    0 2px 0 rgba(255, 255, 255, 0.06) inset;
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 28px 64px -20px color-mix(in srgb, var(--accent) 32%, transparent),
+    0 2px 0 rgba(255, 255, 255, 0.08) inset;
 }
 
 .card .tags {
@@ -525,6 +539,11 @@ header nav {
   transform: scaleX(var(--r));
   transform-origin: left;
   transition: transform 0.45s var(--ease);
+}
+
+.portrait > * {
+  position: relative;
+  z-index: 1;
 }
 
 .placeholder {
@@ -674,6 +693,7 @@ header nav {
   .dialog-close,
   .project-dialog,
   .card,
+  .portrait,
   .card .tags li {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -689,7 +709,8 @@ header nav {
   .glass::after,
   header::after,
   .dialog-close::after,
-  .card::after {
+  .card::after,
+  .portrait::after {
     display: none;
   }
 }
