@@ -104,7 +104,7 @@ export function ProjectCaseStudy({
 									className={
 										primary
 											? "magnetic inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent px-[22px] font-mono text-[12.5px] tracking-[0.04em] text-bg"
-											: "magnetic inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-line px-[22px] font-mono text-[12.5px] tracking-[0.04em] text-fg transition-colors duration-300 hover:border-fg-dim"
+											: "glass magnetic inline-flex min-h-11 items-center justify-center gap-2 overflow-hidden rounded-full border border-line px-[22px] font-mono text-[12.5px] tracking-[0.04em] text-fg transition-colors duration-300 hover:border-fg-dim"
 									}
 								>
 									{link.label}

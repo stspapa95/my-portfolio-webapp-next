@@ -31,7 +31,7 @@ export function Contact() {
               href={social.href}
               target="_blank"
               rel="noreferrer"
-              className="magnetic inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-surface px-[18px] font-mono text-[12.5px] tracking-[0.04em] text-fg-dim transition-colors duration-300 hover:border-accent-line hover:text-fg"
+              className="glass magnetic inline-flex min-h-11 items-center gap-2 overflow-hidden rounded-full border border-line px-[18px] font-mono text-[12.5px] tracking-[0.04em] text-fg-dim transition-colors duration-300 hover:border-accent-line hover:text-fg"
             >
               {social.label}
               <span className="text-accent" aria-hidden>

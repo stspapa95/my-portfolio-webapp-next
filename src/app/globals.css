@@ -131,31 +131,90 @@ body::after {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
 }
 
+.glass,
+header,
+.dialog-close {
+  --glass-fill: rgba(13, 13, 15, 0.38);
+  --glass-shine: rgba(255, 255, 255, 0.2);
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+    var(--glass-fill);
+  backdrop-filter: blur(20px) saturate(165%) brightness(1.08);
+  -webkit-backdrop-filter: blur(20px) saturate(165%) brightness(1.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -10px 18px rgba(255, 255, 255, 0.03),
+    0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+.glass::after,
+header::after,
+.dialog-close::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    118deg,
+    var(--glass-shine) 0%,
+    rgba(255, 255, 255, 0.06) 24%,
+    transparent 46%
+  );
+}
+
 /* the bar — fixed, glassy, borderless until you scroll */
 header {
+  --glass-fill: rgba(13, 13, 15, 0.82);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 20;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  background: rgba(13, 13, 15, 0.55);
+  overflow: hidden;
   border-bottom: 1px solid transparent;
   transition:
     border-color 0.35s ease,
-    background 0.35s ease;
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+header::after {
+  z-index: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 28%,
+    rgba(255, 255, 255, 0.1) 48%,
+    transparent 64%
+  );
+  background-size: 220% 100%;
+  animation: glass-sheen 16s ease-in-out infinite;
 }
 
 header[data-scrolled] {
-  background: rgba(13, 13, 15, 0.78);
-  border-bottom-color: rgba(255, 255, 255, 0.09);
+  --glass-fill: rgba(13, 13, 15, 0.92);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+@keyframes glass-sheen {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* the row — same rules desktop and mobile */
 header nav {
   container-type: inline-size;
   container-name: primary-nav;
+  position: relative;
+  z-index: 1;
   max-width: 1240px;
   margin-inline: auto;
   padding: 16px clamp(20px, 5vw, 64px);
@@ -354,14 +413,25 @@ header nav {
 
 .card {
   --r: 0;
+  --glass-fill: rgba(13, 13, 15, 0.48);
+  --glass-shine: rgba(255, 255, 255, 0.18);
   position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   width: 100%;
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 12px;
-  background: var(--surface);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+    var(--glass-fill);
+  backdrop-filter: blur(22px) saturate(160%) brightness(1.06);
+  -webkit-backdrop-filter: blur(22px) saturate(160%) brightness(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -12px 20px rgba(255, 255, 255, 0.03),
+    0 12px 32px rgba(0, 0, 0, 0.22);
   color: inherit;
   text-align: left;
   text-decoration: none;
@@ -376,7 +446,24 @@ header nav {
     box-shadow 0.45s ease;
 }
 
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    118deg,
+    var(--glass-shine) 0%,
+    rgba(255, 255, 255, 0.05) 26%,
+    transparent 52%
+  );
+}
+
 .card-tilt {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -397,8 +484,9 @@ header nav {
     transform: translateY(-7px);
     border-color: var(--accent-line);
     box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
       0 26px 60px -22px color-mix(in srgb, var(--accent) 28%, transparent),
-      0 2px 0 rgba(255, 255, 255, 0.04) inset;
+      0 2px 0 rgba(255, 255, 255, 0.06) inset;
   }
 }
 
@@ -407,8 +495,9 @@ header nav {
   transform: translateY(-7px);
   border-color: var(--accent-line);
   box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
     0 26px 60px -22px color-mix(in srgb, var(--accent) 28%, transparent),
-    0 2px 0 rgba(255, 255, 255, 0.04) inset;
+    0 2px 0 rgba(255, 255, 255, 0.06) inset;
 }
 
 .card .tags {
@@ -417,6 +506,15 @@ header nav {
   transition:
     opacity 0.45s ease,
     transform 0.45s var(--ease);
+}
+
+.card .tags li {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+    rgba(13, 13, 15, 0.52);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .card .scrim {
@@ -455,16 +553,24 @@ header nav {
   margin: auto;
   overflow: auto;
   overscroll-behavior: contain;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 16px;
-  background: var(--surface-2);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 28%),
+    rgba(17, 17, 22, 0.72);
+  backdrop-filter: blur(28px) saturate(155%);
+  -webkit-backdrop-filter: blur(28px) saturate(155%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 24px 80px rgba(0, 0, 0, 0.38);
   color: var(--text);
   padding: 0;
 }
 
 .project-dialog::backdrop {
   background: rgba(13, 13, 15, 0.42);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
 }
 
 .project-dialog:focus {
@@ -493,13 +599,12 @@ header nav {
   justify-content: center;
   width: 44px;
   height: 44px;
-  border: 1px solid var(--line);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 50%;
-  background: rgba(13, 13, 15, 0.72);
   color: var(--text);
   font-size: 22px;
   line-height: 1;
-  backdrop-filter: blur(10px);
   transition: color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -543,7 +648,8 @@ header nav {
 
   .hero-glow,
   .hero-glow-2,
-  .caret {
+  .caret,
+  header::after {
     animation: none;
   }
 
@@ -559,5 +665,31 @@ header nav {
 
   .magnetic {
     will-change: auto;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  header,
+  .dialog-close,
+  .project-dialog,
+  .card,
+  .card .tags li {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--surface);
+    box-shadow: none;
+  }
+
+  header[data-scrolled],
+  .project-dialog {
+    background: var(--surface-2);
+  }
+
+  .glass::after,
+  header::after,
+  .dialog-close::after,
+  .card::after {
+    display: none;
   }
 }

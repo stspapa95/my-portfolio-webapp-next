@@ -120,7 +120,7 @@ export function Hero() {
 					</a>
 					<a
 						href="#contact"
-						className="magnetic inline-flex min-h-11 items-center justify-center rounded-full border border-line px-[22px] font-display text-[14.5px] tracking-[-0.02em] text-fg"
+						className="glass magnetic inline-flex min-h-11 items-center justify-center overflow-hidden rounded-full border border-line px-[22px] font-display text-[14.5px] tracking-[-0.02em] text-fg"
 					>
 						Get in touch
 					</a>
